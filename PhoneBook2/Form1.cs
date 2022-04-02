@@ -30,15 +30,12 @@ namespace PhoneBook2
                 conn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PhoneBook;Trusted_Connection=True";
                 try
                 {
-                    string FirstName = textBox1.Text;
-                    string LastName = textBox3.Text;
-                    string Phone = textBox2.Text;
-                    string insertString = "INSERT INTO [Telephones] (Name,LastName,TelNumber)" + "VALUES (@Name, @LastName, @TelNumber);";
+                    string insert = "INSERT INTO [Telephones] (Name,LastName,TelNumber)" + "VALUES (@Name, @LastName, @TelNumber);";
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(insertString, conn);
-                    cmd.Parameters.AddWithValue("@Name", FirstName);
-                    cmd.Parameters.AddWithValue("@LastName", LastName);
-                    cmd.Parameters.AddWithValue("@TelNumber", Phone);
+                    SqlCommand cmd = new SqlCommand(insert, conn);
+                    cmd.Parameters.AddWithValue("@Name", textBox1.Text);
+                    cmd.Parameters.AddWithValue("@LastName", textBox3.Text);
+                    cmd.Parameters.AddWithValue("@TelNumber", textBox2.Text);
                     cmd.ExecuteNonQuery();
                 }
                 finally
@@ -50,7 +47,7 @@ namespace PhoneBook2
                     }
                 }
             }
-            else MessageBox.Show("The field is empty");
+            else MessageBox.Show("Error");
         }
         private void UpdateTable()
         {
